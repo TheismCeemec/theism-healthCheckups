@@ -32,3 +32,6 @@ dist-ssr
 *.sln
 *.sw?
 >>>>>>> 9bb1498 (initial commit)
+
+
+backend/node_modules
