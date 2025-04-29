@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: true })); // Add this line
 //app.use(morgan('dev')); // 'dev' format is nice for development
 
 const corsOptions = {
-  origin: "http://localhost:3004",
+  origin: "http://localhost:5173",
   methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE", "OPTIONS"],
   credentials: true,
 };
