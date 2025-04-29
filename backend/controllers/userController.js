@@ -6,7 +6,7 @@ import { sendEmail } from "../config/sendEmail.js";
 
 export const registerController = async (req, res) => {
   try {
-    const { username, email, password, mobile } = req.body;
+    const { fullName, email, password, phone } = req.body;
 
     // Check if email already exists
     const existingUser = await User.findOne({ email });
@@ -18,7 +18,7 @@ export const registerController = async (req, res) => {
     }
 
     // Check if mobile already exists
-    const existingMobile = await User.findOne({ mobile });
+    const existingMobile = await User.findOne({ phone });
     if (existingMobile) {
       return res.status(400).send({
         success: false,
@@ -31,7 +31,7 @@ export const registerController = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     // Send email first (before saving user)
-    const emailResult = await sendEmail(email, username);
+    const emailResult = await sendEmail(email, fullName);
 
     if (!emailResult.success) {
       // If email sending fails, stop the registration
@@ -43,7 +43,7 @@ export const registerController = async (req, res) => {
 
     if (emailResult.success) {
       // Save the user only if email is sent successfully
-      const Newuser = new User({ username, email, password: hashedPassword, mobile });
+      const Newuser = new User({ fullName, email, password: hashedPassword, phone });
       await Newuser.save();
       res.status(200).send({
        success: true,

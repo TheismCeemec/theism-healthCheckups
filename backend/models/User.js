@@ -14,7 +14,7 @@ const validatePassword = (value) => {
 
 const UserSchema = new mongoose.Schema(
     {
-        username: { 
+        fullName: { 
             type: String, 
             required: [true, "Username is required"],  // Built-in validation with custom error message
             trim: true,
@@ -43,7 +43,7 @@ const UserSchema = new mongoose.Schema(
     // }            
         },
         
-        mobile: { 
+        phone: { 
             type: String, 
             required: [true, "Mobile number is required"],  // Built-in validation
             unique: true,
