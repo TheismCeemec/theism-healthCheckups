@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-import axios from "axios"
 
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
@@ -31,8 +30,7 @@ const RegisterPage = () => {
     }))
   }
 
-  // const handleSubmit = (e: React.FormEvent) => {
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     setError("")
 
@@ -49,40 +47,19 @@ const RegisterPage = () => {
 
     setIsSubmitting(true)
 
-    // // Simulate API call
-    // setTimeout(() => {
-    //   setIsSubmitting(false)
+    // Simulate API call
+    setTimeout(() => {
+      setIsSubmitting(false)
 
-    //   // For demo purposes, let's just check if email is already taken
-    //   if (formData.email.includes("taken")) {
-    //     setError("This email is already registered. Please use a different email.")
-    //   } else {
-    //     // Successful registration
-    //     localStorage.setItem("isLoggedIn", "true")
-    //     navigate("/dashboard")
-    //   }
-    // }, 1000)
-    try {
-    const res = await axios.post("http://localhost:9004/users/register", {
-      username: formData.fullName,
-      email: formData.email,
-      password: formData.password,
-      mobile: formData.phone,
-    })
-
-    if (res.data.success) {
-      localStorage.setItem("isLoggedIn", "true")
-      navigate("/dashboard")
-    } else {
-      setError(res.data.message || "Registration failed.")
-    }
-  } catch (err: unknown) {
-    //setError(err.response?.data?.message || "Something went wrong. Please try again.")
-    setError("Something went wrong. Please try again.")
-  } finally {
-    setIsSubmitting(false)
-  }
-
+      // For demo purposes, let's just check if email is already taken
+      if (formData.email.includes("taken")) {
+        setError("This email is already registered. Please use a different email.")
+      } else {
+        // Successful registration
+        localStorage.setItem("isLoggedIn", "true")
+        navigate("/dashboard")
+      }
+    }, 1000)
   }
 
   return (
